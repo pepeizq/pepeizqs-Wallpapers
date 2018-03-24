@@ -106,11 +106,13 @@
     <Compile Include="MainPage.xaml.vb">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modulos\Nasa.vb" />
-    <Compile Include="Modulos\Bing.vb" />
+    <Compile Include="Modulos\Webs\Nasa.vb" />
+    <Compile Include="Modulos\Webs\Bing.vb" />
     <Compile Include="Modulos\Decompiladores.vb" />
     <Compile Include="Modulos\MasCosas.vb" />
     <Compile Include="Modulos\Notificaciones.vb" />
+    <Compile Include="Modulos\Webs\NationalGeographic.vb" />
+    <Compile Include="Modulos\Webs\Space.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +126,8 @@
   <ItemGroup>
     <Content Include="Assets\Webs\bing.png" />
     <Content Include="Assets\Webs\nasa.png" />
+    <Content Include="Assets\Webs\nationalgeographic.png" />
+    <Content Include="Assets\Webs\space.png" />
     <Content Include="My Project\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

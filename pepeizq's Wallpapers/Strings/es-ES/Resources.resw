@@ -123,6 +123,15 @@
   <data name="buttonAddWallpaper.Text" xml:space="preserve">
     <value>Escritorio</value>
   </data>
+  <data name="buttonBack.Text" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="ImageFail" xml:space="preserve">
+    <value>No se ha podido añadir la imagen</value>
+  </data>
+  <data name="ImageSuccess" xml:space="preserve">
+    <value>Se ha añadido la imagen</value>
+  </data>
   <data name="MoreThings" xml:space="preserve">
     <value>Más Cosas</value>
   </data>
@@ -149,5 +158,8 @@
   </data>
   <data name="tbSelectLocation.Text" xml:space="preserve">
     <value>Selecciona donde quieres añadir la imagen</value>
+  </data>
+  <data name="tbSelectWallpaper.Text" xml:space="preserve">
+    <value>Clickea en una imagen para añadir el fondo de pantalla</value>
   </data>
 </root>
