@@ -1,0 +1,134 @@
+﻿<Page
+    x:Class="pepeizq_s_Wallpapers.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:fa="using:FontAwesome.UWP"
+    
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+
+    <Grid Background="{StaticResource ColorGridPrincipal}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="gridTitulo" Grid.Row="0" Background="{StaticResource GridTituloBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="tbTitulo" Grid.Column="0" Margin="20,0,0,0" FontSize="13" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+
+            <Button x:Name="botonMasCosas" Grid.Column="1" BorderThickness="0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" Style="{StaticResource ButtonRevealStyle}">
+                <Button.Content>
+                    <FontIcon Glyph="&#57361;" FontFamily="Segoe MDL2 Assets" Foreground="White" Margin="10,5" FontSize="15"/>
+                </Button.Content>
+
+                <Button.Flyout>
+                    <MenuFlyout x:Name="botonMasCosasMenu"/>
+                </Button.Flyout>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="#FFE4E4E4" Offset="0.5" />
+                        <GradientStop Color="#FFBFBFBF" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <GridView Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50" IsItemClickEnabled="True">
+                    <GridViewItem Margin="10">
+                        <GridViewItem.Content>
+                            <StackPanel Orientation="Vertical" Background="{StaticResource BrushSecundario}" Width="500">
+                                <controls:ImageEx x:Name="imagenFondoDiaBing" IsCacheEnabled="True" Margin="3,3,3,0" Stretch="UniformToFill" Height="300" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" PointerPressed="UsuarioPresionaImagen"/>
+                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <controls:ImageEx Source="Assets\Webs\bing.png" IsCacheEnabled="True" Margin="0,0,10,0" Width="16" Height="16"/>
+                                    <TextBlock Text="Bing" Foreground="White"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GridViewItem.Content>
+                    </GridViewItem>
+                    <GridViewItem Margin="10">
+                        <GridViewItem.Content>
+                            <StackPanel Orientation="Vertical" Background="{StaticResource BrushSecundario}" Width="500">
+                                <controls:ImageEx x:Name="imagenFondoDiaNasa" IsCacheEnabled="True" Margin="3,3,3,0" Stretch="UniformToFill" Height="300" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" PointerPressed="UsuarioPresionaImagen"/>
+                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <controls:ImageEx Source="Assets\Webs\nasa.png" IsCacheEnabled="True" Margin="0,0,10,0" Width="16" Height="16"/>
+                                    <TextBlock Text="Nasa" Foreground="White"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GridViewItem.Content>
+                    </GridViewItem>
+                </GridView>
+            </Grid>
+
+            <Grid x:Name="gridSeleccionarUbicacion" Visibility="Collapsed">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{StaticResource BrushSecundario}" BorderThickness="1">
+                    <StackPanel.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="#FFE4E4E4" Offset="0.5" />
+                            <GradientStop Color="#FFBFBFBF" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </StackPanel.Background>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="botonVolver" Grid.Column="0" Padding="10" Background="{StaticResource BrushSecundario}" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <SymbolIcon Symbol="Back" VerticalAlignment="Center" Foreground="White"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+
+                        <TextBlock x:Uid="tbSelectLocation" Grid.Column="1" Margin="30,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="botonAñadirFondoEscritorio" Grid.Column="0" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome Icon="Desktop" Foreground="White" Margin="0,0,10,0"/>
+                                    <TextBlock x:Uid="buttonAddWallpaper" Foreground="White"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+
+                        <Button x:Name="botonAñadirFondoBloqueo" Grid.Column="1" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:FontAwesome Icon="UnlockAlt" Foreground="White" Margin="0,0,10,0"/>
+                                    <TextBlock x:Uid="buttonAddLockScreen" Foreground="White"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </StackPanel> 
+            </Grid> 
+
+            <Grid x:Name="gridMasCosas" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>
