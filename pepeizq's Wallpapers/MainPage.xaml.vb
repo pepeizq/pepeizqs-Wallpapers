@@ -3,9 +3,7 @@ Imports Microsoft.Toolkit.Uwp.UI.Controls
 Imports Windows.Networking.BackgroundTransfer
 Imports Windows.Storage
 Imports Windows.System.UserProfile
-Imports Windows.UI
 Imports Windows.UI.Core
-Imports Windows.UI.Xaml.Media.Animation
 
 Public NotInheritable Class MainPage
     Inherits Page
@@ -16,11 +14,31 @@ Public NotInheritable Class MainPage
         'Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US"
 
         MasCosas.Generar()
+        ImagenesDia.Generar()
 
-        Bing.GenerarImagenDia()
-        Nasa.GenerarImagenDia()
-        NationalGeographic.GenerarImagenDia()
-        Space.GenerarImagenDia()
+        '--------------------------------------------------------
+
+        Dim transpariencia As New UISettings
+        TransparienciaEfectosFinal(transpariencia.AdvancedEffectsEnabled)
+        AddHandler transpariencia.AdvancedEffectsEnabledChanged, AddressOf TransparienciaEfectosCambia
+
+    End Sub
+
+    Private Sub TransparienciaEfectosCambia(sender As UISettings, e As Object)
+
+        TransparienciaEfectosFinal(sender.AdvancedEffectsEnabled)
+
+    End Sub
+
+    Private Async Sub TransparienciaEfectosFinal(estado As Boolean)
+
+        Await Dispatcher.RunAsync(CoreDispatcherPriority.High, Sub()
+                                                                   If estado = True Then
+                                                                       gridMasCosas.Background = App.Current.Resources("GridAcrilico")
+                                                                   Else
+                                                                       gridMasCosas.Background = New SolidColorBrush(App.Current.Resources("ColorPrimario"))
+                                                                   End If
+                                                               End Sub)
 
     End Sub
 
@@ -33,32 +51,6 @@ Public NotInheritable Class MainPage
     Private Sub UsuarioSaleBoton(sender As Object, e As PointerRoutedEventArgs)
 
         Window.Current.CoreWindow.PointerCursor = New CoreCursor(CoreCursorType.Arrow, 1)
-
-    End Sub
-
-    Private Sub UsuarioPresionaImagen(sender As Object, e As PointerRoutedEventArgs)
-
-        Dim imagen As ImageEx = sender
-
-        Dim transpariencia As New UISettings
-        Dim boolTranspariencia As Boolean = transpariencia.AdvancedEffectsEnabled
-
-        gridSeleccionarUbicacion.Visibility = Visibility.Visible
-        gridSeleccionarUbicacion.Tag = imagen
-
-        If boolTranspariencia = True Then
-            gridSeleccionarUbicacion.Background = App.Current.Resources("GridTituloBackground")
-        Else
-            gridSeleccionarUbicacion.Background = New SolidColorBrush(Colors.LightGray)
-        End If
-
-        ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("imagen", imagen)
-
-        Dim animacion As ConnectedAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("imagen")
-
-        If Not animacion Is Nothing Then
-            animacion.TryStart(gridSeleccionarUbicacion)
-        End If
 
     End Sub
 
@@ -84,11 +76,19 @@ Public NotInheritable Class MainPage
 
     End Sub
 
+    Private Sub BotonGuardarImagen_Click(sender As Object, e As RoutedEventArgs) Handles botonGuardarImagen.Click
+
+        Dim imagen As ImageEx = gridSeleccionarUbicacion.Tag
+
+        AñadirImagen(imagen, 2)
+
+    End Sub
+
     Public Async Sub AñadirImagen(imagen As ImageEx, tipo As Integer)
 
         botonAñadirFondoEscritorio.IsEnabled = False
         botonAñadirFondoBloqueo.IsEnabled = False
-        pbAñadirFondo.Visibility = Visibility.Visible
+        botonGuardarImagen.IsEnabled = False
 
         Dim helper As New LocalObjectStorageHelper
         Dim clave As Integer = 0
@@ -148,12 +148,27 @@ Public NotInheritable Class MainPage
                 Else
                     Toast(recursos.GetString("ImageFail"), Nothing)
                 End If
+            ElseIf tipo = 2 Then
+                Dim ficherosImagen As New List(Of String) From {
+                    ".png"
+                }
+
+                Dim guardarPicker As New Pickers.FileSavePicker With {
+                    .SuggestedStartLocation = Pickers.PickerLocationId.PicturesLibrary,
+                    .SuggestedFileName = "Image"
+                }
+
+                guardarPicker.FileTypeChoices.Add("Image Files", ficherosImagen)
+
+                Dim ficheroGuardado As StorageFile = Await guardarPicker.PickSaveFileAsync
+
+                Await ficheroImagen.CopyAndReplaceAsync(ficheroGuardado)
             End If
         End If
 
         botonAñadirFondoEscritorio.IsEnabled = True
         botonAñadirFondoBloqueo.IsEnabled = True
-        pbAñadirFondo.Visibility = Visibility.Collapsed
+        botonGuardarImagen.IsEnabled = True
 
     End Sub
 

@@ -162,4 +162,10 @@
   <data name="tbSelectWallpaper.Text" xml:space="preserve">
     <value>Click on an image to add the wallpaper</value>
   </data>
+  <data name="buttonSaveImage.Text" xml:space="preserve">
+    <value>Save Image</value>
+  </data>
+  <data name="tbOtherOptions.Text" xml:space="preserve">
+    <value>Other Options</value>
+  </data>
 </root>

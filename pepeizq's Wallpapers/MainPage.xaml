@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="pepeizq_s_Wallpapers.MainPage"
+    x:Class="pepeizqs_Wallpapers.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     
@@ -51,52 +51,8 @@
 
                 <TextBlock x:Uid="tbSelectWallpaper" Grid.Row="0" HorizontalAlignment="Center" Margin="20,20,20,10"/>
 
-                <GridView Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" IsItemClickEnabled="True">
-                    <GridViewItem x:Name="gvItemBing" Margin="10" Visibility="Collapsed">
-                        <GridViewItem.Content>
-                            <StackPanel Orientation="Vertical" Background="{StaticResource BrushSecundario}" Width="500">
-                                <controls:ImageEx x:Name="imagenFondoDiaBing" IsCacheEnabled="True" Margin="3,3,3,0" Stretch="UniformToFill" Height="300" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" PointerPressed="UsuarioPresionaImagen"/>
-                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <controls:ImageEx Source="Assets\Webs\bing.png" IsCacheEnabled="True" Margin="0,0,10,0" Width="16" Height="16"/>
-                                    <TextBlock Text="Bing" Foreground="White"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </GridViewItem.Content>
-                    </GridViewItem>
-                    <GridViewItem x:Name="gvItemNasa" Margin="10" Visibility="Collapsed">
-                        <GridViewItem.Content>
-                            <StackPanel Orientation="Vertical" Background="{StaticResource BrushSecundario}" Width="500">
-                                <controls:ImageEx x:Name="imagenFondoDiaNasa" IsCacheEnabled="True" Margin="3,3,3,0" Stretch="UniformToFill" Height="300" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" PointerPressed="UsuarioPresionaImagen"/>
-                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <controls:ImageEx Source="Assets\Webs\nasa.png" IsCacheEnabled="True" Margin="0,0,10,0" Width="16" Height="16"/>
-                                    <TextBlock Text="Nasa" Foreground="White"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </GridViewItem.Content>
-                    </GridViewItem>
-                    <GridViewItem x:Name="gvItemNationalGeographic" Margin="10" Visibility="Collapsed">
-                        <GridViewItem.Content>
-                            <StackPanel Orientation="Vertical" Background="{StaticResource BrushSecundario}" Width="500">
-                                <controls:ImageEx x:Name="imagenFondoDiaNationalGeographic" IsCacheEnabled="True" Margin="3,3,3,0" Stretch="UniformToFill" Height="300" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" PointerPressed="UsuarioPresionaImagen"/>
-                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <controls:ImageEx Source="Assets\Webs\nationalgeographic.png" IsCacheEnabled="True" Margin="0,0,10,0" Width="16" Height="16"/>
-                                    <TextBlock Text="National Geographic" Foreground="White"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </GridViewItem.Content>
-                    </GridViewItem>
-                    <GridViewItem x:Name="gvItemSpace" Margin="10" Visibility="Collapsed">
-                        <GridViewItem.Content>
-                            <StackPanel Orientation="Vertical" Background="{StaticResource BrushSecundario}" Width="500">
-                                <controls:ImageEx x:Name="imagenFondoDiaSpace" IsCacheEnabled="True" Margin="3,3,3,0" Stretch="UniformToFill" Height="300" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" PointerPressed="UsuarioPresionaImagen"/>
-                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <controls:ImageEx Source="Assets\Webs\space.png" IsCacheEnabled="True" Margin="0,0,10,0" Width="16" Height="16"/>
-                                    <TextBlock Text="Space" Foreground="White"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </GridViewItem.Content>
-                    </GridViewItem>
-                </GridView>
+                <GridView x:Name="gvFondos" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" IsItemClickEnabled="True"/>
+
             </Grid>
 
             <Grid x:Name="gridSeleccionarUbicacion" Visibility="Collapsed">
@@ -144,12 +100,34 @@
                                 </Button.Content>
                             </Button>
                         </Grid>
-
-                        <ProgressBar x:Name="pbAñadirFondo" Margin="0,0,0,20" IsIndeterminate="True" Width="100" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="{StaticResource BrushSecundario}"/>
                     </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="40,20" BorderBrush="{StaticResource BrushSecundario}" BorderThickness="1">
+                        <StackPanel.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#FFE4E4E4" Offset="0.5" />
+                                <GradientStop Color="#FFBFBFBF" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </StackPanel.Background>
+
+                        <TextBlock x:Uid="tbOtherOptions" Margin="30,15,30,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="botonGuardarImagen" Grid.Column="0" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" HorizontalAlignment="Center">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:FontAwesome Icon="Image" Foreground="White" Margin="0,0,10,0"/>
+                                        <TextBlock x:Uid="buttonSaveImage" Foreground="White"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </Grid> 
+                    </StackPanel> 
                 </StackPanel>
-                
-               
             </Grid> 
 
             <Grid x:Name="gridMasCosas" Visibility="Collapsed"/>

@@ -7,7 +7,7 @@ Imports Windows.UI.Core
 
 Module MasCosas
 
-    Dim traduccion As String = "https://poeditor.com/join/project/kZm2NYjV5a"
+    Dim traduccion As String = "https://poeditor.com/join/project/P5hZp6yvoM"
     Dim codigoFuente As String = "https://github.com/pepeizq/pepeizq-s-Wallpapers"
 
     Public Sub Generar()

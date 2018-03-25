@@ -162,4 +162,10 @@
   <data name="tbSelectWallpaper.Text" xml:space="preserve">
     <value>Clickea en una imagen para añadir el fondo de pantalla</value>
   </data>
+  <data name="buttonSaveImage.Text" xml:space="preserve">
+    <value>Guardar Imagen</value>
+  </data>
+  <data name="tbOtherOptions.Text" xml:space="preserve">
+    <value>Otras Opciones</value>
+  </data>
 </root>
