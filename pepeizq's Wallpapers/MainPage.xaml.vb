@@ -1,4 +1,5 @@
-﻿Imports Microsoft.Toolkit.Uwp.Helpers
+﻿Imports FontAwesome.UWP
+Imports Microsoft.Toolkit.Uwp.Helpers
 Imports Microsoft.Toolkit.Uwp.UI.Controls
 Imports Windows.Networking.BackgroundTransfer
 Imports Windows.Storage
@@ -8,6 +9,34 @@ Imports Windows.UI.Core
 Public NotInheritable Class MainPage
     Inherits Page
 
+    Private Sub Nv_Loaded(sender As Object, e As RoutedEventArgs)
+
+        Dim recursos As New Resources.ResourceLoader()
+
+        nvPrincipal.MenuItems.Add(NavigationViewItems.Generar(recursos.GetString("Home"), FontAwesomeIcon.Home, 0))
+
+    End Sub
+
+    Private Sub Nv_ItemInvoked(sender As NavigationView, args As NavigationViewItemInvokedEventArgs)
+
+        Dim recursos As New Resources.ResourceLoader()
+
+        Dim item As TextBlock = args.InvokedItem
+
+        If Not item Is Nothing Then
+            If item.Text = recursos.GetString("Home") Then
+                GridVisibilidad(gridFondos, item.Text)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub Nv_ItemFlyout(sender As NavigationViewItem, args As TappedRoutedEventArgs)
+
+        FlyoutBase.ShowAttachedFlyout(sender)
+
+    End Sub
+
     Private Sub Page_Loaded(sender As FrameworkElement, args As Object)
 
         'Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-ES"
@@ -16,29 +45,20 @@ Public NotInheritable Class MainPage
         MasCosas.Generar()
         ImagenesDia.Generar()
 
-        '--------------------------------------------------------
+        Dim recursos As New Resources.ResourceLoader()
 
-        Dim transpariencia As New UISettings
-        TransparienciaEfectosFinal(transpariencia.AdvancedEffectsEnabled)
-        AddHandler transpariencia.AdvancedEffectsEnabledChanged, AddressOf TransparienciaEfectosCambia
-
-    End Sub
-
-    Private Sub TransparienciaEfectosCambia(sender As UISettings, e As Object)
-
-        TransparienciaEfectosFinal(sender.AdvancedEffectsEnabled)
+        GridVisibilidad(gridFondos, recursos.GetString("Home"))
+        nvPrincipal.IsPaneOpen = False
 
     End Sub
 
-    Private Async Sub TransparienciaEfectosFinal(estado As Boolean)
+    Private Sub GridVisibilidad(grid As Grid, tag As String)
 
-        Await Dispatcher.RunAsync(CoreDispatcherPriority.High, Sub()
-                                                                   If estado = True Then
-                                                                       gridMasCosas.Background = App.Current.Resources("GridAcrilico")
-                                                                   Else
-                                                                       gridMasCosas.Background = New SolidColorBrush(App.Current.Resources("ColorPrimario"))
-                                                                   End If
-                                                               End Sub)
+        tbTitulo.Text = Package.Current.DisplayName + " (" + Package.Current.Id.Version.Major.ToString + "." + Package.Current.Id.Version.Minor.ToString + "." + Package.Current.Id.Version.Build.ToString + "." + Package.Current.Id.Version.Revision.ToString + ") - " + tag
+
+        gridFondos.Visibility = Visibility.Collapsed
+
+        grid.Visibility = Visibility.Visible
 
     End Sub
 

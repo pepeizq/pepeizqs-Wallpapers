@@ -168,4 +168,7 @@
   <data name="tbOtherOptions.Text" xml:space="preserve">
     <value>Otras Opciones</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
 </root>
