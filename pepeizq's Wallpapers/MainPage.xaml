@@ -52,9 +52,125 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock x:Uid="tbSelectWallpaper" Grid.Row="0" HorizontalAlignment="Center" Margin="20,20,20,10"/>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+                        <fa:FontAwesome Icon="InfoCircle" Foreground="{StaticResource BrushSecundario}"/>
+                        <TextBlock x:Uid="tbSelectWallpaper" Margin="10,0,0,0"/>
+                    </StackPanel>
+                   
+                    <Pivot x:Name="pivotFondos" Grid.Row="1" Margin="0,0,0,10">
+                        <PivotItem Tag="0">
+                            <PivotItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ImageEx Source="Assets/Webs/bing.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                    <TextBlock Text="Bing" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                </StackPanel>
+                            </PivotItem.Header>
 
-                    <GridView x:Name="gvFondos" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" IsItemClickEnabled="True"/>
+                            <Grid>
+                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
+                                    <controls:ImageEx x:Name="imagenBing" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                                </Border>
+                            </Grid>
+                        </PivotItem>
+                        <PivotItem Tag="1">
+                            <PivotItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ImageEx Source="Assets/Webs/nasa.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                    <TextBlock Text="Nasa" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                </StackPanel>
+                            </PivotItem.Header>
+
+                            <Grid>
+                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
+                                    <controls:ImageEx x:Name="imagenNasa" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                                </Border>
+                            </Grid>
+                        </PivotItem>
+                        <PivotItem Tag="2">
+                            <PivotItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ImageEx Source="Assets/Webs/nationalgeographic.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                    <TextBlock Text="National Geographic" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                </StackPanel>
+                            </PivotItem.Header>
+
+                            <Grid>
+                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
+                                    <controls:ImageEx x:Name="imagenNationalGeographic" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                                </Border>
+                            </Grid>
+                        </PivotItem>
+                        <PivotItem Tag="3">
+                            <PivotItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ImageEx Source="Assets/Webs/space.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                    <TextBlock Text="Space" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                </StackPanel>
+                            </PivotItem.Header>
+
+                            <Grid>
+                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
+                                    <controls:ImageEx x:Name="imagenSpace" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                                </Border>
+                            </Grid>
+                        </PivotItem>
+                        <PivotItem Tag="4">
+                            <PivotItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                    <TextBlock Text="Reddit (Earth)" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                </StackPanel>
+                            </PivotItem.Header>
+
+                            <Grid>
+                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
+                                    <controls:ImageEx x:Name="imagenRedditEarth" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                                </Border>
+                            </Grid>
+                        </PivotItem>
+                        <PivotItem Tag="5">
+                            <PivotItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                    <TextBlock Text="Reddit (Space)" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                </StackPanel>
+                            </PivotItem.Header>
+
+                            <Grid>
+                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
+                                    <controls:ImageEx x:Name="imagenRedditSpace" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                                </Border>
+                            </Grid>
+                        </PivotItem>
+                        <PivotItem Tag="6">
+                            <PivotItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                    <TextBlock Text="Reddit (City)" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                </StackPanel>
+                            </PivotItem.Header>
+
+                            <Grid>
+                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
+                                    <controls:ImageEx x:Name="imagenRedditCity" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                                </Border>
+                            </Grid>
+                        </PivotItem>
+                        <PivotItem Tag="7">
+                            <PivotItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                    <TextBlock Text="Reddit (Map)" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
+                                </StackPanel>
+                            </PivotItem.Header>
+
+                            <Grid>
+                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
+                                    <controls:ImageEx x:Name="imagenRedditMap" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                                </Border>
+                            </Grid>
+                        </PivotItem>
+                    </Pivot>
                 </Grid>
 
                 <Grid x:Name="gridSeleccionarUbicacion" Visibility="Collapsed">

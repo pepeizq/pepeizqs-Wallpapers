@@ -43,7 +43,7 @@ Public NotInheritable Class MainPage
         'Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US"
 
         MasCosas.Generar()
-        ImagenesDia.Generar()
+        ImagenesDia.Bing()
 
         Dim recursos As New Resources.ResourceLoader()
 
@@ -192,5 +192,32 @@ Public NotInheritable Class MainPage
 
     End Sub
 
+    Private Async Sub PivotFondos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles pivotFondos.SelectionChanged
 
+        Dim pivot As Pivot = sender
+        Dim item As PivotItem = pivot.SelectedItem
+
+        If Not item Is Nothing Then
+            Await Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, Sub()
+                                                                                                                If item.Tag = 0 Then
+                                                                                                                    ImagenesDia.Bing()
+                                                                                                                ElseIf item.Tag = 1 Then
+                                                                                                                    ImagenesDia.Nasa()
+                                                                                                                ElseIf item.Tag = 2 Then
+                                                                                                                    ImagenesDia.NationalGeographic()
+                                                                                                                ElseIf item.Tag = 3 Then
+                                                                                                                    ImagenesDia.Space()
+                                                                                                                ElseIf item.Tag = 4 Then
+                                                                                                                    ImagenesDia.Reddit("EarthPorn", "Earth")
+                                                                                                                ElseIf item.Tag = 5 Then
+                                                                                                                    ImagenesDia.Reddit("spaceporn", "Space")
+                                                                                                                ElseIf item.Tag = 6 Then
+                                                                                                                    ImagenesDia.Reddit("CityPorn", "City")
+                                                                                                                ElseIf item.Tag = 7 Then
+                                                                                                                    ImagenesDia.Reddit("Map_Porn", "Map")
+                                                                                                                End If
+                                                                                                            End Sub)
+        End If
+
+    End Sub
 End Class

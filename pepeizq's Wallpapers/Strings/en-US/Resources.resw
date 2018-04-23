@@ -171,4 +171,10 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="StoreDescription" xml:space="preserve">
+    <value>Add a wallpaper for your desktop, enter each day to access new wallpapers.</value>
+  </data>
+  <data name="StoreTags" xml:space="preserve">
+    <value>Desktop;Wallpaper</value>
+  </data>
 </root>

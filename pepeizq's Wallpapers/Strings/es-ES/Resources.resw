@@ -171,4 +171,10 @@
   <data name="Home" xml:space="preserve">
     <value>Inicio</value>
   </data>
+  <data name="StoreDescription" xml:space="preserve">
+    <value>Añade un fondo de pantalla para tu escritorio, entra cada día para poder acceder a nuevos fondos.</value>
+  </data>
+  <data name="StoreTags" xml:space="preserve">
+    <value>Escritorio;Fondo de Pantalla</value>
+  </data>
 </root>
