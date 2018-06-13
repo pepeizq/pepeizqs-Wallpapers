@@ -21,6 +21,9 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
+    <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -123,6 +126,7 @@
     </AppxManifest>
     <None Include="pepeizq%27s Wallpapers_StoreKey.pfx" />
     <None Include="pepeizq's Wallpapers_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\pl-PL\Resources.resw" />
     <PRIResource Include="Strings\pt-BR\Resources.resw" />
     <PRIResource Include="Strings\es-ES\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
@@ -185,6 +189,7 @@
     <Content Include="Assets\Webs\reddit.png" />
     <Content Include="Assets\Webs\space.png" />
     <Content Include="My Project\Default.rd.xml" />
+    <None Include="Package.StoreAssociation.xml" />
     <None Include="Package.xml" />
   </ItemGroup>
   <ItemGroup>
