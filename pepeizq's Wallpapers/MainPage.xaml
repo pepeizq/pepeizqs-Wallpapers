@@ -10,6 +10,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
 
+    <Page.Resources>
+        <Storyboard x:Name="sbGridFondos" RepeatBehavior="Forever" SpeedRatio="0.2">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="gridFondos"
+                Storyboard.TargetProperty="(UIElement.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                EnableDependentAnimation="True" BeginTime="-0:0:0.5">
+                <LinearColorKeyFrame KeyTime="0:0:0" Value="#e4e4e4"/>
+                <LinearColorKeyFrame KeyTime="0:0:1" Value="#bebebe"/>
+                <LinearColorKeyFrame KeyTime="0:0:2" Value="#aaaaaa"/>
+                <LinearColorKeyFrame KeyTime="0:0:3" Value="#979797"/>
+                <LinearColorKeyFrame KeyTime="0:0:4" Value="#dbdbdb"/>
+                <LinearColorKeyFrame KeyTime="0:0:5" Value="#838383"/>
+                <LinearColorKeyFrame KeyTime="0:0:6" Value="#e4e4e4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames
+                Storyboard.TargetName="gridFondos"
+                Storyboard.TargetProperty="(UIElement.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"
+                EnableDependentAnimation="True">
+                <LinearColorKeyFrame KeyTime="0:0:0" Value="#e4e4e4"/>
+                <LinearColorKeyFrame KeyTime="0:0:1" Value="#bebebe"/>
+                <LinearColorKeyFrame KeyTime="0:0:2" Value="#aaaaaa"/>
+                <LinearColorKeyFrame KeyTime="0:0:3" Value="#979797"/>
+                <LinearColorKeyFrame KeyTime="0:0:4" Value="#dbdbdb"/>
+                <LinearColorKeyFrame KeyTime="0:0:5" Value="#838383"/>
+                <LinearColorKeyFrame KeyTime="0:0:6" Value="#e4e4e4"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+
     <Grid Background="{StaticResource ColorGridPrincipal}">
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
@@ -21,7 +49,7 @@
         </Grid>
 
         <NavigationView x:Name="nvPrincipal" Grid.Row="1" Loaded="Nv_Loaded" ItemInvoked="Nv_ItemInvoked"
-                        OpenPaneLength="200" AlwaysShowHeader="False" IsSettingsVisible="False">
+                        OpenPaneLength="200" AlwaysShowHeader="False" IsSettingsVisible="False" IsBackButtonVisible="Collapsed">
             <NavigationView.PaneFooter>
                 <StackPanel Orientation="Vertical">
                     <NavigationViewItem x:Name="itemMasCosas" Tapped="Nv_ItemFlyout" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
@@ -39,213 +67,132 @@
                     </TransitionCollection>
                 </Grid.Transitions>
 
-                <Grid.Background>
-                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#FFE4E4E4" Offset="0.5" />
-                        <GradientStop Color="#FFBFBFBF" Offset="1.0" />
-                    </LinearGradientBrush>
-                </Grid.Background>
-
                 <Grid x:Name="gridFondos">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0.0,0" EndPoint="1,1">
+                            <GradientStop Offset="0.0" />
+                            <GradientStop Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
 
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                        <fa:FontAwesome Icon="InfoCircle" Foreground="{StaticResource BrushSecundario}"/>
-                        <TextBlock x:Uid="tbSelectWallpaper" Margin="10,0,0,0"/>
-                    </StackPanel>
-                   
-                    <Pivot x:Name="pivotFondos" Grid.Row="1" Margin="0,0,0,10">
-                        <PivotItem Tag="0">
-                            <PivotItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:ImageEx Source="Assets/Webs/bing.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                    <TextBlock Text="Bing" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                </StackPanel>
-                            </PivotItem.Header>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                            <Grid>
-                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
-                                    <controls:ImageEx x:Name="imagenBing" IsCacheEnabled="True" Stretch="UniformToFill"/>
-                                </Border>
-                            </Grid>
-                        </PivotItem>
-                        <PivotItem Tag="1">
-                            <PivotItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:ImageEx Source="Assets/Webs/nasa.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                    <TextBlock Text="Nasa" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                </StackPanel>
-                            </PivotItem.Header>
-
-                            <Grid>
-                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
-                                    <controls:ImageEx x:Name="imagenNasa" IsCacheEnabled="True" Stretch="UniformToFill"/>
-                                </Border>
-                            </Grid>
-                        </PivotItem>
-                        <PivotItem Tag="2">
-                            <PivotItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:ImageEx Source="Assets/Webs/nationalgeographic.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                    <TextBlock Text="National Geographic" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                </StackPanel>
-                            </PivotItem.Header>
-
-                            <Grid>
-                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
-                                    <controls:ImageEx x:Name="imagenNationalGeographic" IsCacheEnabled="True" Stretch="UniformToFill"/>
-                                </Border>
-                            </Grid>
-                        </PivotItem>
-                        <PivotItem Tag="3">
-                            <PivotItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:ImageEx Source="Assets/Webs/space.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                    <TextBlock Text="Space" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                </StackPanel>
-                            </PivotItem.Header>
-
-                            <Grid>
-                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
-                                    <controls:ImageEx x:Name="imagenSpace" IsCacheEnabled="True" Stretch="UniformToFill"/>
-                                </Border>
-                            </Grid>
-                        </PivotItem>
-                        <PivotItem Tag="4">
-                            <PivotItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                    <TextBlock Text="Reddit (Earth)" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                </StackPanel>
-                            </PivotItem.Header>
-
-                            <Grid>
-                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
-                                    <controls:ImageEx x:Name="imagenRedditEarth" IsCacheEnabled="True" Stretch="UniformToFill"/>
-                                </Border>
-                            </Grid>
-                        </PivotItem>
-                        <PivotItem Tag="5">
-                            <PivotItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                    <TextBlock Text="Reddit (Space)" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                </StackPanel>
-                            </PivotItem.Header>
-
-                            <Grid>
-                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
-                                    <controls:ImageEx x:Name="imagenRedditSpace" IsCacheEnabled="True" Stretch="UniformToFill"/>
-                                </Border>
-                            </Grid>
-                        </PivotItem>
-                        <PivotItem Tag="6">
-                            <PivotItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                    <TextBlock Text="Reddit (City)" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                </StackPanel>
-                            </PivotItem.Header>
-
-                            <Grid>
-                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
-                                    <controls:ImageEx x:Name="imagenRedditCity" IsCacheEnabled="True" Stretch="UniformToFill"/>
-                                </Border>
-                            </Grid>
-                        </PivotItem>
-                        <PivotItem Tag="7">
-                            <PivotItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                    <TextBlock Text="Reddit (Map)" Padding="10,0,0,0" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton"/>
-                                </StackPanel>
-                            </PivotItem.Header>
-
-                            <Grid>
-                                <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}">
-                                    <controls:ImageEx x:Name="imagenRedditMap" IsCacheEnabled="True" Stretch="UniformToFill"/>
-                                </Border>
-                            </Grid>
-                        </PivotItem>
-                    </Pivot>
-                </Grid>
-
-                <Grid x:Name="gridSeleccionarUbicacion" Visibility="Collapsed">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Button x:Name="botonVolver" Margin="40,20" Padding="10" Background="{StaticResource BrushSecundario}" HorizontalAlignment="Center" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <SymbolIcon Symbol="Back" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
-                                    <TextBlock x:Uid="buttonBack" Foreground="White"/>
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-
-                        <StackPanel Orientation="Vertical" Margin="40,20" BorderBrush="{StaticResource BrushSecundario}" BorderThickness="1">
-                            <StackPanel.Background>
-                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                    <GradientStop Color="#FFE4E4E4" Offset="0.5" />
-                                    <GradientStop Color="#FFBFBFBF" Offset="1.0" />
-                                </LinearGradientBrush>
-                            </StackPanel.Background>
-
-                            <TextBlock x:Uid="tbSelectLocation" Margin="30,15,30,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Button x:Name="botonAñadirFondoEscritorio" Grid.Column="0" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
-                                    <Button.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <fa:FontAwesome Icon="Desktop" Foreground="White" Margin="0,0,10,0"/>
-                                            <TextBlock x:Uid="buttonAddWallpaper" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
-
-                                <Button x:Name="botonAñadirFondoBloqueo" Grid.Column="1" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
-                                    <Button.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <fa:FontAwesome Icon="UnlockAlt" Foreground="White" Margin="0,0,10,0"/>
-                                            <TextBlock x:Uid="buttonAddLockScreen" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
-                            </Grid>
+                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="20">
+                            <fa:FontAwesome Icon="InfoCircle" Foreground="{StaticResource BrushSecundario}"/>
+                            <TextBlock x:Uid="tbSelectWallpaper2" Margin="15,0,0,0" TextWrapping="Wrap" MaxWidth="300"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Vertical" Margin="40,20" BorderBrush="{StaticResource BrushSecundario}" BorderThickness="1">
-                            <StackPanel.Background>
-                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                    <GradientStop Color="#FFE4E4E4" Offset="0.5" />
-                                    <GradientStop Color="#FFBFBFBF" Offset="1.0" />
-                                </LinearGradientBrush>
-                            </StackPanel.Background>
-
-                            <TextBlock x:Uid="tbOtherOptions" Margin="30,15,30,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Button x:Name="botonGuardarImagen" Grid.Column="0" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" HorizontalAlignment="Center">
-                                    <Button.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <fa:FontAwesome Icon="Image" Foreground="White" Margin="0,0,10,0"/>
-                                            <TextBlock x:Uid="buttonSaveImage" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
-                            </Grid>
-                        </StackPanel>
+                        <ListView x:Name="lvFondos" Margin="20" Background="#FFBFBFBF" IsItemClickEnabled="True" BorderBrush="{StaticResource BrushSecundario}" BorderThickness="1">
+                            <ListViewItem HorizontalAlignment="Stretch" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                <StackPanel Orientation="Horizontal" Tag="0">
+                                    <controls:ImageEx Source="Assets/Webs/bing.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Bing" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem HorizontalAlignment="Stretch" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                <StackPanel Orientation="Horizontal" Tag="1">
+                                    <controls:ImageEx Source="Assets/Webs/nasa.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Nasa" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem HorizontalAlignment="Stretch" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                <StackPanel Orientation="Horizontal" Tag="2">
+                                    <controls:ImageEx Source="Assets/Webs/nationalgeographic.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                    <TextBlock Text="National Geographic" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem HorizontalAlignment="Stretch" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                <StackPanel Orientation="Horizontal" Tag="3">
+                                    <controls:ImageEx Source="Assets/Webs/space.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Space" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem HorizontalAlignment="Stretch" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                <StackPanel Orientation="Horizontal" Tag="4">
+                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Reddit (Earth)" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem HorizontalAlignment="Stretch" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                <StackPanel Orientation="Horizontal" Tag="5">
+                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Reddit (Space)" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem HorizontalAlignment="Stretch" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                <StackPanel Orientation="Horizontal" Tag="6">
+                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Reddit (City)" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem HorizontalAlignment="Stretch" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                <StackPanel Orientation="Horizontal" Tag="7">
+                                    <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Reddit (Map)" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </ListViewItem>
+                        </ListView>
                     </StackPanel>
+
+                    <ScrollViewer Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical">
+                            <Border BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}" Margin="20">
+                                <controls:ImageEx x:Name="imagenFondo" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                            </Border>
+
+                            <StackPanel Orientation="Vertical" Background="#FFBFBFBF" Margin="20,0,20,20" BorderBrush="{StaticResource BrushSecundario}" BorderThickness="1">
+                                <TextBlock x:Uid="tbSelectLocation" Margin="30,15,30,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button x:Name="botonAñadirFondoEscritorio" Grid.Column="0" HorizontalAlignment="Center" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                        <Button.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <fa:FontAwesome Icon="Desktop" Foreground="White" Margin="0,0,10,0"/>
+                                                <TextBlock x:Uid="buttonAddWallpaper" Foreground="White"/>
+                                            </StackPanel>
+                                        </Button.Content>
+                                    </Button>
+
+                                    <Button x:Name="botonAñadirFondoBloqueo" Grid.Column="1" HorizontalAlignment="Center" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                        <Button.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <fa:FontAwesome Icon="UnlockAlt" Foreground="White" Margin="0,0,10,0"/>
+                                                <TextBlock x:Uid="buttonAddLockScreen" Foreground="White"/>
+                                            </StackPanel>
+                                        </Button.Content>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Background="#FFBFBFBF" Margin="20,0,20,20" BorderBrush="{StaticResource BrushSecundario}" BorderThickness="1">
+                                <TextBlock x:Uid="tbOtherOptions" Margin="30,15,30,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button x:Name="botonGuardarImagen" Grid.Column="0" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" HorizontalAlignment="Center">
+                                        <Button.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <fa:FontAwesome Icon="Image" Foreground="White" Margin="0,0,10,0"/>
+                                                <TextBlock x:Uid="buttonSaveImage" Foreground="White"/>
+                                            </StackPanel>
+                                        </Button.Content>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </Grid> 
         </NavigationView> 

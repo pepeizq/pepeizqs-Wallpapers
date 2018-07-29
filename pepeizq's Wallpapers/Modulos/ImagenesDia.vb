@@ -25,12 +25,8 @@ Module ImagenesDia
                 Dim frame As Frame = Window.Current.Content
                 Dim pagina As Page = frame.Content
 
-                Dim imagenFondo As ImageEx = pagina.FindName("imagenBing")
+                Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)
-
-                AddHandler imagenFondo.PointerPressed, AddressOf UsuarioPresionaImagen
-                AddHandler imagenFondo.PointerEntered, AddressOf UsuarioEntraBoton
-                AddHandler imagenFondo.PointerExited, AddressOf UsuarioSaleBoton
             End If
         End If
 
@@ -56,12 +52,8 @@ Module ImagenesDia
                 Dim frame As Frame = Window.Current.Content
                 Dim pagina As Page = frame.Content
 
-                Dim imagenFondo As ImageEx = pagina.FindName("imagenNasa")
+                Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)
-
-                AddHandler imagenFondo.PointerPressed, AddressOf UsuarioPresionaImagen
-                AddHandler imagenFondo.PointerEntered, AddressOf UsuarioEntraBoton
-                AddHandler imagenFondo.PointerExited, AddressOf UsuarioSaleBoton
             End If
         End If
 
@@ -90,12 +82,8 @@ Module ImagenesDia
                 Dim frame As Frame = Window.Current.Content
                 Dim pagina As Page = frame.Content
 
-                Dim imagenFondo As ImageEx = pagina.FindName("imagenSpace")
+                Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)
-
-                AddHandler imagenFondo.PointerPressed, AddressOf UsuarioPresionaImagen
-                AddHandler imagenFondo.PointerEntered, AddressOf UsuarioEntraBoton
-                AddHandler imagenFondo.PointerExited, AddressOf UsuarioSaleBoton
             End If
         End If
 
@@ -124,12 +112,8 @@ Module ImagenesDia
                 Dim frame As Frame = Window.Current.Content
                 Dim pagina As Page = frame.Content
 
-                Dim imagenFondo As ImageEx = pagina.FindName("imagenNationalGeographic")
+                Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)
-
-                AddHandler imagenFondo.PointerPressed, AddressOf UsuarioPresionaImagen
-                AddHandler imagenFondo.PointerEntered, AddressOf UsuarioEntraBoton
-                AddHandler imagenFondo.PointerExited, AddressOf UsuarioSaleBoton
             End If
         End If
 
@@ -160,57 +144,10 @@ Module ImagenesDia
                 Dim frame As Frame = Window.Current.Content
                 Dim pagina As Page = frame.Content
 
-                Dim imagenFondo As ImageEx = pagina.FindName("imagenReddit" + subNombre)
+                Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)
-
-                AddHandler imagenFondo.PointerPressed, AddressOf UsuarioPresionaImagen
-                AddHandler imagenFondo.PointerEntered, AddressOf UsuarioEntraBoton
-                AddHandler imagenFondo.PointerExited, AddressOf UsuarioSaleBoton
             End If
         End If
-
-    End Sub
-
-    Private Sub UsuarioPresionaImagen(sender As Object, e As PointerRoutedEventArgs)
-
-        Dim imagen As ImageEx = sender
-
-        Dim transpariencia As New UISettings
-        Dim boolTranspariencia As Boolean = transpariencia.AdvancedEffectsEnabled
-
-        Dim frame As Frame = Window.Current.Content
-        Dim pagina As Page = frame.Content
-
-        Dim gridSeleccionarUbicacion As Grid = pagina.FindName("gridSeleccionarUbicacion")
-
-        gridSeleccionarUbicacion.Visibility = Visibility.Visible
-        gridSeleccionarUbicacion.Tag = imagen
-
-        If boolTranspariencia = True Then
-            gridSeleccionarUbicacion.Background = App.Current.Resources("GridTituloBackground")
-        Else
-            gridSeleccionarUbicacion.Background = New SolidColorBrush(Windows.UI.Colors.LightGray)
-        End If
-
-        ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("imagen", imagen)
-
-        Dim animacion As ConnectedAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("imagen")
-
-        If Not animacion Is Nothing Then
-            animacion.TryStart(gridSeleccionarUbicacion)
-        End If
-
-    End Sub
-
-    Private Sub UsuarioEntraBoton(sender As Object, e As PointerRoutedEventArgs)
-
-        Window.Current.CoreWindow.PointerCursor = New CoreCursor(CoreCursorType.Hand, 1)
-
-    End Sub
-
-    Private Sub UsuarioSaleBoton(sender As Object, e As PointerRoutedEventArgs)
-
-        Window.Current.CoreWindow.PointerCursor = New CoreCursor(CoreCursorType.Arrow, 1)
 
     End Sub
 

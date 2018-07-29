@@ -42,6 +42,8 @@ Public NotInheritable Class MainPage
         'Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-ES"
         'Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US"
 
+        sbGridFondos.Begin()
+
         MasCosas.Generar()
         ImagenesDia.Bing()
 
@@ -74,33 +76,22 @@ Public NotInheritable Class MainPage
 
     End Sub
 
-    Private Sub BotonVolver_Click(sender As Object, e As RoutedEventArgs) Handles botonVolver.Click
-
-        gridSeleccionarUbicacion.Visibility = Visibility.Collapsed
-
-    End Sub
 
     Private Sub BotonAñadirFondoEscritorio_Click(sender As Object, e As RoutedEventArgs) Handles botonAñadirFondoEscritorio.Click
 
-        Dim imagen As ImageEx = gridSeleccionarUbicacion.Tag
-
-        AñadirImagen(imagen, 0)
+        AñadirImagen(imagenFondo, 0)
 
     End Sub
 
     Private Sub BotonAñadirFondoBloqueo_Click(sender As Object, e As RoutedEventArgs) Handles botonAñadirFondoBloqueo.Click
 
-        Dim imagen As ImageEx = gridSeleccionarUbicacion.Tag
-
-        AñadirImagen(imagen, 1)
+        AñadirImagen(imagenFondo, 1)
 
     End Sub
 
     Private Sub BotonGuardarImagen_Click(sender As Object, e As RoutedEventArgs) Handles botonGuardarImagen.Click
 
-        Dim imagen As ImageEx = gridSeleccionarUbicacion.Tag
-
-        AñadirImagen(imagen, 2)
+        AñadirImagen(imagenFondo, 2)
 
     End Sub
 
@@ -192,32 +183,28 @@ Public NotInheritable Class MainPage
 
     End Sub
 
-    Private Async Sub PivotFondos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles pivotFondos.SelectionChanged
+    Private Sub LvFondos_ItemClick(sender As Object, e As ItemClickEventArgs) Handles lvFondos.ItemClick
 
-        Dim pivot As Pivot = sender
-        Dim item As PivotItem = pivot.SelectedItem
+        Dim sp As StackPanel = e.ClickedItem
 
-        If Not item Is Nothing Then
-            Await Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, Sub()
-                                                                                                                If item.Tag = 0 Then
-                                                                                                                    ImagenesDia.Bing()
-                                                                                                                ElseIf item.Tag = 1 Then
-                                                                                                                    ImagenesDia.Nasa()
-                                                                                                                ElseIf item.Tag = 2 Then
-                                                                                                                    ImagenesDia.NationalGeographic()
-                                                                                                                ElseIf item.Tag = 3 Then
-                                                                                                                    ImagenesDia.Space()
-                                                                                                                ElseIf item.Tag = 4 Then
-                                                                                                                    ImagenesDia.Reddit("EarthPorn", "Earth")
-                                                                                                                ElseIf item.Tag = 5 Then
-                                                                                                                    ImagenesDia.Reddit("spaceporn", "Space")
-                                                                                                                ElseIf item.Tag = 6 Then
-                                                                                                                    ImagenesDia.Reddit("CityPorn", "City")
-                                                                                                                ElseIf item.Tag = 7 Then
-                                                                                                                    ImagenesDia.Reddit("Map_Porn", "Map")
-                                                                                                                End If
-                                                                                                            End Sub)
+        If sp.Tag = 0 Then
+            ImagenesDia.Bing()
+        ElseIf sp.Tag = 1 Then
+            ImagenesDia.Nasa()
+        ElseIf sp.Tag = 2 Then
+            ImagenesDia.NationalGeographic()
+        ElseIf sp.Tag = 3 Then
+            ImagenesDia.Space()
+        ElseIf sp.Tag = 4 Then
+            ImagenesDia.Reddit("EarthPorn", "Earth")
+        ElseIf sp.Tag = 5 Then
+            ImagenesDia.Reddit("spaceporn", "Space")
+        ElseIf sp.Tag = 6 Then
+            ImagenesDia.Reddit("CityPorn", "City")
+        ElseIf sp.Tag = 7 Then
+            ImagenesDia.Reddit("Map_Porn", "Map")
         End If
 
     End Sub
+
 End Class
