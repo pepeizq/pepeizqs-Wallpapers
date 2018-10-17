@@ -178,6 +178,6 @@
     <value>Desktop;Wallpaper</value>
   </data>
   <data name="tbSelectWallpaper2.Text" xml:space="preserve">
-    <value>Click on a source to load the wallpaper they have put in the last 24 hours</value>
+    <value>Select a web to load the wallpaper they have put in the last 24 hours</value>
   </data>
 </root>

@@ -1,5 +1,4 @@
-﻿Imports FontAwesome.UWP
-Imports Microsoft.Toolkit.Uwp.Helpers
+﻿Imports Microsoft.Toolkit.Uwp.Helpers
 Imports Microsoft.Toolkit.Uwp.UI.Controls
 Imports Windows.Networking.BackgroundTransfer
 Imports Windows.Storage
@@ -13,7 +12,7 @@ Public NotInheritable Class MainPage
 
         Dim recursos As New Resources.ResourceLoader()
 
-        nvPrincipal.MenuItems.Add(NavigationViewItems.Generar(recursos.GetString("Home"), FontAwesomeIcon.Home, 0))
+        'nvPrincipal.MenuItems.Add(NavigationViewItems.Generar(recursos.GetString("Home"), FontAwesomeIcon.Home, 0))
 
     End Sub
 
@@ -25,7 +24,7 @@ Public NotInheritable Class MainPage
 
         If Not item Is Nothing Then
             If item.Text = recursos.GetString("Home") Then
-                GridVisibilidad(gridFondos, item.Text)
+                'GridVisibilidad(gridFondos, item.Text)
             End If
         End If
 
@@ -42,27 +41,21 @@ Public NotInheritable Class MainPage
         'Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-ES"
         'Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US"
 
-        sbGridFondos.Begin()
-
         MasCosas.Generar()
-        ImagenesDia.Bing()
 
-        Dim recursos As New Resources.ResourceLoader()
-
-        GridVisibilidad(gridFondos, recursos.GetString("Home"))
-        nvPrincipal.IsPaneOpen = False
+        cbFondos.SelectedIndex = 0
 
     End Sub
 
-    Private Sub GridVisibilidad(grid As Grid, tag As String)
+    'Private Sub GridVisibilidad(grid As Grid, tag As String)
 
-        tbTitulo.Text = Package.Current.DisplayName + " (" + Package.Current.Id.Version.Major.ToString + "." + Package.Current.Id.Version.Minor.ToString + "." + Package.Current.Id.Version.Build.ToString + "." + Package.Current.Id.Version.Revision.ToString + ") - " + tag
+    '    tbTitulo.Text = Package.Current.DisplayName + " (" + Package.Current.Id.Version.Major.ToString + "." + Package.Current.Id.Version.Minor.ToString + "." + Package.Current.Id.Version.Build.ToString + "." + Package.Current.Id.Version.Revision.ToString + ") - " + tag
 
-        gridFondos.Visibility = Visibility.Collapsed
+    '    gridFondos.Visibility = Visibility.Collapsed
 
-        grid.Visibility = Visibility.Visible
+    '    grid.Visibility = Visibility.Visible
 
-    End Sub
+    'End Sub
 
     Private Sub UsuarioEntraBoton(sender As Object, e As PointerRoutedEventArgs)
 
@@ -183,28 +176,25 @@ Public NotInheritable Class MainPage
 
     End Sub
 
-    Private Sub LvFondos_ItemClick(sender As Object, e As ItemClickEventArgs) Handles lvFondos.ItemClick
+    Private Sub CbFondos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cbFondos.SelectionChanged
 
-        Dim sp As StackPanel = e.ClickedItem
-
-        If sp.Tag = 0 Then
+        If cbFondos.SelectedIndex = 0 Then
             ImagenesDia.Bing()
-        ElseIf sp.Tag = 1 Then
+        ElseIf cbFondos.SelectedIndex = 1 Then
             ImagenesDia.Nasa()
-        ElseIf sp.Tag = 2 Then
+        ElseIf cbFondos.SelectedIndex = 2 Then
             ImagenesDia.NationalGeographic()
-        ElseIf sp.Tag = 3 Then
+        ElseIf cbFondos.SelectedIndex = 3 Then
             ImagenesDia.Space()
-        ElseIf sp.Tag = 4 Then
+        ElseIf cbFondos.SelectedIndex = 4 Then
             ImagenesDia.Reddit("EarthPorn", "Earth")
-        ElseIf sp.Tag = 5 Then
+        ElseIf cbFondos.SelectedIndex = 5 Then
             ImagenesDia.Reddit("spaceporn", "Space")
-        ElseIf sp.Tag = 6 Then
+        ElseIf cbFondos.SelectedIndex = 6 Then
             ImagenesDia.Reddit("CityPorn", "City")
-        ElseIf sp.Tag = 7 Then
+        ElseIf cbFondos.SelectedIndex = 7 Then
             ImagenesDia.Reddit("Map_Porn", "Map")
         End If
 
     End Sub
-
 End Class

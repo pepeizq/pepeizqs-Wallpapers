@@ -1,11 +1,15 @@
 ﻿Imports System.Net
 Imports Microsoft.Toolkit.Uwp.UI.Controls
-Imports Windows.UI.Core
-Imports Windows.UI.Xaml.Media.Animation
 
 Module ImagenesDia
 
     Public Async Sub Bing()
+
+        Dim frame As Frame = Window.Current.Content
+        Dim pagina As Page = frame.Content
+
+        Dim tbTitulo As TextBlock = pagina.FindName("tbTitulo")
+        tbTitulo.Text = Package.Current.DisplayName + " (" + Package.Current.Id.Version.Major.ToString + "." + Package.Current.Id.Version.Minor.ToString + "." + Package.Current.Id.Version.Build.ToString + "." + Package.Current.Id.Version.Revision.ToString + ") - Bing"
 
         Dim html As String = Await Decompiladores.HttpClient(New Uri("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US"))
 
@@ -22,9 +26,6 @@ Module ImagenesDia
 
                 Dim enlace As String = "https://www.bing.com" + temp2.Trim
 
-                Dim frame As Frame = Window.Current.Content
-                Dim pagina As Page = frame.Content
-
                 Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)
             End If
@@ -33,6 +34,12 @@ Module ImagenesDia
     End Sub
 
     Public Async Sub Nasa()
+
+        Dim frame As Frame = Window.Current.Content
+        Dim pagina As Page = frame.Content
+
+        Dim tbTitulo As TextBlock = pagina.FindName("tbTitulo")
+        tbTitulo.Text = Package.Current.DisplayName + " (" + Package.Current.Id.Version.Major.ToString + "." + Package.Current.Id.Version.Minor.ToString + "." + Package.Current.Id.Version.Build.ToString + "." + Package.Current.Id.Version.Revision.ToString + ") - Nasa"
 
         Dim html As String = Await Decompiladores.HttpClient(New Uri("https://api.nasa.gov/planetary/apod?api_key=Uqit7gyg7GiUGHf2pNclhJeKFCBZyFSS4Uc7qbSB"))
 
@@ -49,9 +56,6 @@ Module ImagenesDia
 
                 Dim enlace As String = temp2.Trim
 
-                Dim frame As Frame = Window.Current.Content
-                Dim pagina As Page = frame.Content
-
                 Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)
             End If
@@ -60,6 +64,12 @@ Module ImagenesDia
     End Sub
 
     Public Async Sub Space()
+
+        Dim frame As Frame = Window.Current.Content
+        Dim pagina As Page = frame.Content
+
+        Dim tbTitulo As TextBlock = pagina.FindName("tbTitulo")
+        tbTitulo.Text = Package.Current.DisplayName + " (" + Package.Current.Id.Version.Major.ToString + "." + Package.Current.Id.Version.Minor.ToString + "." + Package.Current.Id.Version.Build.ToString + "." + Package.Current.Id.Version.Revision.ToString + ") - Space"
 
         Dim html As String = Await Decompiladores.HttpClient(New Uri("https://www.space.com/34-image-day.html"))
 
@@ -79,9 +89,6 @@ Module ImagenesDia
 
                 Dim enlace As String = temp2.Trim
 
-                Dim frame As Frame = Window.Current.Content
-                Dim pagina As Page = frame.Content
-
                 Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)
             End If
@@ -90,6 +97,12 @@ Module ImagenesDia
     End Sub
 
     Public Async Sub NationalGeographic()
+
+        Dim frame As Frame = Window.Current.Content
+        Dim pagina As Page = frame.Content
+
+        Dim tbTitulo As TextBlock = pagina.FindName("tbTitulo")
+        tbTitulo.Text = Package.Current.DisplayName + " (" + Package.Current.Id.Version.Major.ToString + "." + Package.Current.Id.Version.Minor.ToString + "." + Package.Current.Id.Version.Build.ToString + "." + Package.Current.Id.Version.Revision.ToString + ") - National Geographic"
 
         Dim html As String = Await Decompiladores.HttpClient(New Uri("https://www.nationalgeographic.com/photography/photo-of-the-day/"))
 
@@ -109,9 +122,6 @@ Module ImagenesDia
 
                 Dim enlace As String = temp2.Trim
 
-                Dim frame As Frame = Window.Current.Content
-                Dim pagina As Page = frame.Content
-
                 Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)
             End If
@@ -120,6 +130,12 @@ Module ImagenesDia
     End Sub
 
     Public Async Sub Reddit(subEnlace As String, subNombre As String)
+
+        Dim frame As Frame = Window.Current.Content
+        Dim pagina As Page = frame.Content
+
+        Dim tbTitulo As TextBlock = pagina.FindName("tbTitulo")
+        tbTitulo.Text = Package.Current.DisplayName + " (" + Package.Current.Id.Version.Major.ToString + "." + Package.Current.Id.Version.Minor.ToString + "." + Package.Current.Id.Version.Build.ToString + "." + Package.Current.Id.Version.Revision.ToString + ") - Reddit (" + subNombre + ")"
 
         Dim html As String = Await Decompiladores.HttpClient(New Uri("https://www.reddit.com/r/" + subEnlace + "/.json"))
 
@@ -140,9 +156,6 @@ Module ImagenesDia
                 temp3 = temp2.Remove(int3, temp2.Length - int3)
 
                 Dim enlace As String = temp3.Trim
-
-                Dim frame As Frame = Window.Current.Content
-                Dim pagina As Page = frame.Content
 
                 Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
                 imagenFondo.Source = New Uri(enlace)

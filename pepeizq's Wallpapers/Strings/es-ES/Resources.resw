@@ -178,6 +178,6 @@
     <value>Escritorio;Fondo de Pantalla</value>
   </data>
   <data name="tbSelectWallpaper2.Text" xml:space="preserve">
-    <value>Clickea en una web para cargar el fondo de pantalla que ellos han puesto en las últimas 24 horas</value>
+    <value>Selecciona una web para cargar el fondo de pantalla que ellos han puesto en las últimas 24 horas</value>
   </data>
 </root>
