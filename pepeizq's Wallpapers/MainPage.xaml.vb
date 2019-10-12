@@ -20,13 +20,13 @@ Public NotInheritable Class MainPage
 
         Dim recursos As New Resources.ResourceLoader()
 
-        Dim item As TextBlock = args.InvokedItem
+        'Dim item As TextBlock = args.InvokedItem
 
-        If Not item Is Nothing Then
-            If item.Text = recursos.GetString("Home") Then
-                'GridVisibilidad(gridFondos, item.Text)
-            End If
-        End If
+        'If Not item Is Nothing Then
+        '    If item.Text = recursos.GetString("Home") Then
+        '        GridVisibilidad(gridFondos, item.Text)
+        '    End If
+        'End If
 
     End Sub
 
@@ -178,22 +178,28 @@ Public NotInheritable Class MainPage
 
     Private Sub CbFondos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cbFondos.SelectionChanged
 
+        tbTituloFondo.Visibility = Visibility.Collapsed
+        tbTituloFondo.Text = String.Empty
+
+        tbDescripcionFondo.Visibility = Visibility.Collapsed
+        tbDescripcionFondo.Text = String.Empty
+
         If cbFondos.SelectedIndex = 0 Then
-            ImagenesDia.Bing()
+            Bing.Generar()
         ElseIf cbFondos.SelectedIndex = 1 Then
-            ImagenesDia.Nasa()
+            Nasa.Generar()
         ElseIf cbFondos.SelectedIndex = 2 Then
-            ImagenesDia.NationalGeographic()
+            NationalGeographic.Generar()
         ElseIf cbFondos.SelectedIndex = 3 Then
-            ImagenesDia.Space()
+            Space.Generar()
         ElseIf cbFondos.SelectedIndex = 4 Then
-            ImagenesDia.Reddit("EarthPorn", "Earth")
+            Reddit.Generar("EarthPorn")
         ElseIf cbFondos.SelectedIndex = 5 Then
-            ImagenesDia.Reddit("spaceporn", "Space")
+            Reddit.Generar("spaceporn")
         ElseIf cbFondos.SelectedIndex = 6 Then
-            ImagenesDia.Reddit("CityPorn", "City")
+            Reddit.Generar("CityPorn")
         ElseIf cbFondos.SelectedIndex = 7 Then
-            ImagenesDia.Reddit("Map_Porn", "Map")
+            Reddit.Generar("Map_Porn")
         End If
 
     End Sub

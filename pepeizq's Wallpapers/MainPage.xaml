@@ -24,6 +24,10 @@
                         AlwaysShowHeader="False" IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed">
             <NavigationView.MenuItems>
                 <ComboBox x:Name="cbFondos" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                    <ToolTipService.ToolTip>
+                        <TextBlock x:Uid="tbSelectWallpaper2" TextWrapping="Wrap" FontSize="15"/>
+                    </ToolTipService.ToolTip>
+
                     <ComboBoxItem>
                         <ComboBoxItem.Content>
                             <StackPanel Orientation="Horizontal">
@@ -109,74 +113,64 @@
 
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#FFE4E4E4" Offset="0.5" />
-                        <GradientStop Color="#FFBFBFBF" Offset="1.0" />
+                        <GradientStop Color="#505e6a" Offset="0.5" />
+                        <GradientStop Color="#2a3a49" Offset="1.0" />
                     </LinearGradientBrush>
                 </Grid.Background>
 
                 <Grid x:Name="gridFondos">
-                    <Grid.Background>
-                        <LinearGradientBrush StartPoint="0.0,0" EndPoint="1,1">
-                            <GradientStop Offset="0.0" />
-                            <GradientStop Offset="1.0" />
-                        </LinearGradientBrush>
-                    </Grid.Background>
-
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" Margin="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                    <Border Opacity="0.5">
+                        <controls:ImageEx x:Name="imagenFondo" IsCacheEnabled="True" Stretch="UniformToFill"/>
+                    </Border>
 
-                        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <fa:FontAwesome Icon="InfoCircle" Foreground="{StaticResource BrushSecundario}"/>
-                            <TextBlock x:Uid="tbSelectWallpaper2" Margin="15,0,0,0" TextWrapping="Wrap" MaxWidth="300"/>
-                        </StackPanel>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Column="1" Orientation="Vertical" Background="#FFBFBFBF" BorderBrush="{StaticResource BrushSecundario}" BorderThickness="1" Margin="20,0">
-                            <TextBlock x:Uid="tbSelectLocation" Margin="30,15,30,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Grid Grid.Row="0" Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.4"/>
+                            </Grid.Background>
 
-                                <Button x:Name="botonAñadirFondoEscritorio" Grid.Column="0" HorizontalAlignment="Center" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
-                                    <Button.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <fa:FontAwesome Icon="Desktop" Foreground="White" Margin="0,0,10,0"/>
-                                            <TextBlock x:Uid="buttonAddWallpaper" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
+                            <StackPanel Grid.Column="0" Orientation="Vertical">
+                                <TextBlock x:Uid="tbSelectLocation" Foreground="White"/>
 
-                                <Button x:Name="botonAñadirFondoBloqueo" Grid.Column="1" HorizontalAlignment="Center" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
-                                    <Button.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <fa:FontAwesome Icon="UnlockAlt" Foreground="White" Margin="0,0,10,0"/>
-                                            <TextBlock x:Uid="buttonAddLockScreen" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
-                            </Grid>
-                        </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <Button x:Name="botonAñadirFondoEscritorio" Padding="20,15" Background="{StaticResource BrushPrimario}" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource BrushTerciario}" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                        <Button.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <fa:FontAwesome Icon="Desktop" Foreground="White" Margin="0,0,10,0"/>
+                                                <TextBlock x:Uid="buttonAddWallpaper" Foreground="White"/>
+                                            </StackPanel>
+                                        </Button.Content>
+                                    </Button>
 
-                        <StackPanel Grid.Column="2" Orientation="Vertical" Background="#FFBFBFBF" BorderBrush="{StaticResource BrushSecundario}" BorderThickness="1">
-                            <TextBlock x:Uid="tbOtherOptions" Margin="30,15,30,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Button x:Name="botonAñadirFondoBloqueo" Padding="20,15" Margin="30,0,0,0" Background="{StaticResource BrushPrimario}" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource BrushTerciario}" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                        <Button.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <fa:FontAwesome Icon="UnlockAlt" Foreground="White" Margin="0,0,10,0"/>
+                                                <TextBlock x:Uid="buttonAddLockScreen" Foreground="White"/>
+                                            </StackPanel>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
 
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1" Orientation="Vertical">
+                                <TextBlock x:Uid="tbOtherOptions" Foreground="White" HorizontalAlignment="Center"/>
 
-                                <Button x:Name="botonGuardarImagen" Grid.Column="0" Margin="20" Padding="10" Background="{StaticResource BrushSecundario}" BorderBrush="{StaticResource BrushPrimario}" BorderThickness="1" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton" HorizontalAlignment="Center">
+                                <Button x:Name="botonGuardarImagen" Margin="0,20,0,0" Padding="20,15" Background="{StaticResource BrushPrimario}" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource BrushTerciario}" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <fa:FontAwesome Icon="Image" Foreground="White" Margin="0,0,10,0"/>
@@ -184,13 +178,18 @@
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
-                            </Grid>
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Bottom" Padding="20">
+                            <StackPanel.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.4"/>
+                            </StackPanel.Background>
+                            
+                            <TextBlock x:Name="tbTituloFondo" Foreground="White" TextWrapping="Wrap" Visibility="Collapsed"/>
+                            <TextBlock x:Name="tbDescripcionFondo" Foreground="White" TextWrapping="Wrap" Margin="0,20,0,0" Visibility="Collapsed"/>
                         </StackPanel>
                     </Grid>
-
-                    <Border Grid.Row="1" Margin="20,0,20,20" BorderThickness="1" BorderBrush="{StaticResource BrushSecundario}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <controls:ImageEx x:Name="imagenFondo" IsCacheEnabled="True" Stretch="Uniform"/>
-                    </Border>
                 </Grid>
             </Grid> 
         </NavigationView> 
