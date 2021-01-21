@@ -15,16 +15,16 @@ Module NationalGeographic
 
             If Not fondo Is Nothing Then
                 Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
-                imagenFondo.Source = New Uri(fondo.Datos(0).Enlace)
+                imagenFondo.Source = fondo.Datos(0).Imagen.Enlace
 
-                If Not fondo.Datos(0).Titulo Is Nothing Then
+                If Not fondo.Datos(0).Imagen.Titulo Is Nothing Then
                     Dim tbTitulo As TextBlock = pagina.FindName("tbTituloFondo")
-                    tbTitulo.Text = fondo.Datos(0).Titulo
+                    tbTitulo.Text = fondo.Datos(0).Imagen.Titulo
                     tbTitulo.Visibility = Visibility.Visible
                 End If
 
-                If Not fondo.Datos(0).Descripcion Is Nothing Then
-                    Dim descripcion As String = fondo.Datos(0).Descripcion
+                If Not fondo.Datos(0).Imagen.Descripcion Is Nothing Then
+                    Dim descripcion As String = fondo.Datos(0).Imagen.Descripcion
                     descripcion = descripcion.Replace("<p>", Nothing)
                     descripcion = descripcion.Replace("</p>", Nothing)
                     descripcion = descripcion.Trim
@@ -49,13 +49,20 @@ End Class
 
 Public Class NationalGeographicFondoDatos
 
+    <JsonProperty("image")>
+    Public Imagen As NationalGeographicFondoDatosImagen
+
+End Class
+
+Public Class NationalGeographicFondoDatosImagen
+
     <JsonProperty("title")>
     Public Titulo As String
 
-    <JsonProperty("originalUrl")>
-    Public Enlace As String
-
-    <JsonProperty("caption")>
+    <JsonProperty("alt_text")>
     Public Descripcion As String
+
+    <JsonProperty("uri")>
+    Public Enlace As String
 
 End Class

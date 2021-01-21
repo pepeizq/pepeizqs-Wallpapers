@@ -1,4 +1,5 @@
-﻿Imports Microsoft.Toolkit.Uwp.UI.Controls
+﻿Imports System.Net
+Imports Microsoft.Toolkit.Uwp.UI.Controls
 Imports Newtonsoft.Json
 
 Module Reddit
@@ -14,12 +15,24 @@ Module Reddit
             Dim fondo As RedditFondo = JsonConvert.DeserializeObject(Of RedditFondo)(html)
 
             If Not fondo Is Nothing Then
-                Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
-                imagenFondo.Source = New Uri(fondo.Datos.Hijos(0).Datos.Enlace)
+                Dim post As Integer = 0
 
-                If Not fondo.Datos.Hijos(0).Datos.Titulo Is Nothing Then
+                Dim i As Integer = 0
+                While i < 10
+                    If Not fondo.Datos.Hijos(i).Datos.Enlace = "image" Then
+                        post = i + 1
+                    Else
+                        Exit While
+                    End If
+                    i += 1
+                End While
+
+                Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
+                imagenFondo.Source = fondo.Datos.Hijos(post).Datos.Enlace
+
+                If Not fondo.Datos.Hijos(post).Datos.Titulo Is Nothing Then
                     Dim tbTitulo As TextBlock = pagina.FindName("tbTituloFondo")
-                    tbTitulo.Text = fondo.Datos.Hijos(0).Datos.Titulo
+                    tbTitulo.Text = WebUtility.HtmlDecode(fondo.Datos.Hijos(post).Datos.Titulo)
                     tbTitulo.Visibility = Visibility.Visible
                 End If
             End If
@@ -57,5 +70,8 @@ Public Class RedditFondoDatosHijosContenido
 
     <JsonProperty("url")>
     Public Enlace As String
+
+    <JsonProperty("post_hint")>
+    Public Tipo As String
 
 End Class

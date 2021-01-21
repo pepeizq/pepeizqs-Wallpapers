@@ -4,26 +4,60 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:fa="using:FontAwesome.UWP"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:iconos="using:FontAwesome5"
     
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
 
-    <Grid Background="{StaticResource ColorGridPrincipal}">
+    <Grid Background="{ThemeResource SystemControlAcrylicElementBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="gridTitulo" Grid.Row="0" Background="{StaticResource GridTituloBackground}">
-            <TextBlock x:Name="tbTitulo" Margin="15,0,0,0" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+        <Grid x:Name="gridTitulo" Grid.Row="0" Background="{StaticResource AcrilicoFondo}">
+            <TextBlock x:Name="tbTitulo" Margin="15,0,0,0" FontSize="12" Foreground="White" VerticalAlignment="Center"/>
         </Grid>
 
-        <NavigationView x:Name="nvPrincipal" Grid.Row="1" Loaded="Nv_Loaded" ItemInvoked="Nv_ItemInvoked"
+        <NavigationView x:Name="nvPrincipal" Grid.Row="1" Background="{StaticResource AcrilicoFondo}" Loaded="Nv_Loaded" ItemInvoked="Nv_ItemInvoked" IsPaneOpen="False"
                         AlwaysShowHeader="False" IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed">
+
+            <NavigationView.Resources>
+                <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="{StaticResource ColorPrimario}"/>
+            </NavigationView.Resources>
+
+            <NavigationView.PaneCustomContent>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="botonMasCosas">
+                        <Button.Flyout>
+                            <Flyout>
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+
+                                <Grid Padding="10" MaxHeight="500">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorCuarto}" Opacity="0.8"/>
+                                    </Grid.Background>
+
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <StackPanel x:Name="spMasCosas" Orientation="Vertical" Margin="5" Padding="0,0,15,0"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
+            </NavigationView.PaneCustomContent>
+
             <NavigationView.MenuItems>
-                <ComboBox x:Name="cbFondos" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                <ComboBox x:Name="cbFondos" Margin="5,0,0,0">
                     <ToolTipService.ToolTip>
                         <TextBlock x:Uid="tbSelectWallpaper2" TextWrapping="Wrap" FontSize="15"/>
                     </ToolTipService.ToolTip>
@@ -92,32 +126,27 @@
                             </StackPanel>
                         </ComboBoxItem.Content>
                     </ComboBoxItem>
+                    <ComboBoxItem>
+                        <ComboBoxItem.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                <TextBlock Text="Reddit (Wallpapers)" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </ComboBoxItem.Content>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <ComboBoxItem.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <controls:ImageEx Source="Assets/Webs/reddit.png" IsCacheEnabled="True" Width="16" Height="16" VerticalAlignment="Center"/>
+                                <TextBlock Text="Reddit (Future)" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </ComboBoxItem.Content>
+                    </ComboBoxItem>
                 </ComboBox>
+                <NavigationViewItemSeparator/>
             </NavigationView.MenuItems>
-            <NavigationView.PaneFooter>
-                <StackPanel Orientation="Vertical">
-                    <NavigationViewItem x:Name="itemMasCosas" Tapped="Nv_ItemFlyout" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
-                        <FlyoutBase.AttachedFlyout>
-                            <MenuFlyout x:Name="botonMasCosasMenu"/>
-                        </FlyoutBase.AttachedFlyout>
-                    </NavigationViewItem>
-                </StackPanel>
-            </NavigationView.PaneFooter>
 
             <Grid>
-                <Grid.Transitions>
-                    <TransitionCollection>
-                        <EdgeUIThemeTransition Edge="Bottom"/>
-                    </TransitionCollection>
-                </Grid.Transitions>
-
-                <Grid.Background>
-                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#505e6a" Offset="0.5" />
-                        <GradientStop Color="#2a3a49" Offset="1.0" />
-                    </LinearGradientBrush>
-                </Grid.Background>
-
                 <Grid x:Name="gridFondos">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -147,19 +176,19 @@
                                 <TextBlock x:Uid="tbSelectLocation" Foreground="White"/>
 
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                                    <Button x:Name="botonAñadirFondoEscritorio" Padding="20,15" Background="{StaticResource BrushPrimario}" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource BrushTerciario}" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                    <Button x:Name="botonAñadirFondoEscritorio" Style="{ThemeResource ButtonRevealStyle}" Background="{StaticResource ColorSecundario}" Padding="15,12" BorderThickness="0">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal">
-                                                <fa:FontAwesome Icon="Desktop" Foreground="White" Margin="0,0,10,0"/>
+                                                <iconos:FontAwesome Icon="Solid_Desktop" Foreground="White" Margin="0,0,10,0"/>
                                                 <TextBlock x:Uid="buttonAddWallpaper" Foreground="White"/>
                                             </StackPanel>
                                         </Button.Content>
                                     </Button>
 
-                                    <Button x:Name="botonAñadirFondoBloqueo" Padding="20,15" Margin="30,0,0,0" Background="{StaticResource BrushPrimario}" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource BrushTerciario}" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                    <Button x:Name="botonAñadirFondoBloqueo" Margin="30,0,0,0" Style="{ThemeResource ButtonRevealStyle}" Background="{StaticResource ColorSecundario}" Padding="15,12" BorderThickness="0">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal">
-                                                <fa:FontAwesome Icon="UnlockAlt" Foreground="White" Margin="0,0,10,0"/>
+                                                <iconos:FontAwesome Icon="Solid_UnlockAlt" Foreground="White" Margin="0,0,10,0"/>
                                                 <TextBlock x:Uid="buttonAddLockScreen" Foreground="White"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -170,10 +199,10 @@
                             <StackPanel Grid.Column="1" Orientation="Vertical">
                                 <TextBlock x:Uid="tbOtherOptions" Foreground="White" HorizontalAlignment="Center"/>
 
-                                <Button x:Name="botonGuardarImagen" Margin="0,20,0,0" Padding="20,15" Background="{StaticResource BrushPrimario}" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource BrushTerciario}" PointerEntered="UsuarioEntraBoton" PointerExited="UsuarioSaleBoton">
+                                <Button x:Name="botonGuardarImagen" Margin="0,20,0,0" Style="{ThemeResource ButtonRevealStyle}" Background="{StaticResource ColorSecundario}" Padding="15,12" BorderThickness="0">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <fa:FontAwesome Icon="Image" Foreground="White" Margin="0,0,10,0"/>
+                                            <iconos:FontAwesome Icon="Solid_Image" Foreground="White" Margin="0,0,10,0"/>
                                             <TextBlock x:Uid="buttonSaveImage" Foreground="White"/>
                                         </StackPanel>
                                     </Button.Content>

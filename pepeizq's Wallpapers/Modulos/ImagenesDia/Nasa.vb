@@ -15,7 +15,7 @@ Module Nasa
 
             If Not fondo Is Nothing Then
                 Dim imagenFondo As ImageEx = pagina.FindName("imagenFondo")
-                imagenFondo.Source = New Uri(fondo.Enlace)
+                imagenFondo.Source = fondo.Enlace2
 
                 If Not fondo.Titulo Is Nothing Then
                     Dim tbTitulo As TextBlock = pagina.FindName("tbTituloFondo")
@@ -45,5 +45,8 @@ Public Class NasaFondo
 
     <JsonProperty("explanation")>
     Public Detalles As String
+
+    <JsonProperty("url")>
+    Public Enlace2 As String
 
 End Class

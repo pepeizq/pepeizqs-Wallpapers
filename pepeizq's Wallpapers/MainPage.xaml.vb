@@ -1,11 +1,4 @@
-﻿Imports Microsoft.Toolkit.Uwp.Helpers
-Imports Microsoft.Toolkit.Uwp.UI.Controls
-Imports Windows.Networking.BackgroundTransfer
-Imports Windows.Storage
-Imports Windows.System.UserProfile
-Imports Windows.UI.Core
-
-Public NotInheritable Class MainPage
+﻿Public NotInheritable Class MainPage
     Inherits Page
 
     Private Sub Nv_Loaded(sender As Object, e As RoutedEventArgs)
@@ -30,177 +23,14 @@ Public NotInheritable Class MainPage
 
     End Sub
 
-    Private Sub Nv_ItemFlyout(sender As NavigationViewItem, args As TappedRoutedEventArgs)
-
-        FlyoutBase.ShowAttachedFlyout(sender)
-
-    End Sub
-
     Private Sub Page_Loaded(sender As FrameworkElement, args As Object)
 
         'Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "es-ES"
         'Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US"
 
-        MasCosas.Generar()
-
-        cbFondos.SelectedIndex = 0
-
-    End Sub
-
-    'Private Sub GridVisibilidad(grid As Grid, tag As String)
-
-    '    tbTitulo.Text = Package.Current.DisplayName + " (" + Package.Current.Id.Version.Major.ToString + "." + Package.Current.Id.Version.Minor.ToString + "." + Package.Current.Id.Version.Build.ToString + "." + Package.Current.Id.Version.Revision.ToString + ") - " + tag
-
-    '    gridFondos.Visibility = Visibility.Collapsed
-
-    '    grid.Visibility = Visibility.Visible
-
-    'End Sub
-
-    Private Sub UsuarioEntraBoton(sender As Object, e As PointerRoutedEventArgs)
-
-        Window.Current.CoreWindow.PointerCursor = New CoreCursor(CoreCursorType.Hand, 1)
+        Interfaz.Fondos.Cargar()
+        MasCosas.Cargar()
 
     End Sub
 
-    Private Sub UsuarioSaleBoton(sender As Object, e As PointerRoutedEventArgs)
-
-        Window.Current.CoreWindow.PointerCursor = New CoreCursor(CoreCursorType.Arrow, 1)
-
-    End Sub
-
-
-    Private Sub BotonAñadirFondoEscritorio_Click(sender As Object, e As RoutedEventArgs) Handles botonAñadirFondoEscritorio.Click
-
-        AñadirImagen(imagenFondo, 0)
-
-    End Sub
-
-    Private Sub BotonAñadirFondoBloqueo_Click(sender As Object, e As RoutedEventArgs) Handles botonAñadirFondoBloqueo.Click
-
-        AñadirImagen(imagenFondo, 1)
-
-    End Sub
-
-    Private Sub BotonGuardarImagen_Click(sender As Object, e As RoutedEventArgs) Handles botonGuardarImagen.Click
-
-        AñadirImagen(imagenFondo, 2)
-
-    End Sub
-
-    Public Async Sub AñadirImagen(imagen As ImageEx, tipo As Integer)
-
-        botonAñadirFondoEscritorio.IsEnabled = False
-        botonAñadirFondoBloqueo.IsEnabled = False
-        botonGuardarImagen.IsEnabled = False
-
-        Dim helper As New LocalObjectStorageHelper
-        Dim clave As Integer = 0
-
-        If helper.KeyExists("claveFondo") Then
-            clave = helper.Read(Of Integer)("claveFondo")
-        End If
-
-        clave = clave + 1
-
-        helper.Save(Of Integer)("claveFondo", clave)
-
-        Dim nombreFondo As String = clave.ToString
-
-        Dim ficheroImagen As StorageFile = Nothing
-        Dim descargaFinalizada As Boolean = False
-
-        Dim fuente As Object = imagen.Source
-
-        If TypeOf fuente Is Uri Then
-            ficheroImagen = Await ApplicationData.Current.LocalFolder.CreateFileAsync(nombreFondo + ".png", CreationCollisionOption.ReplaceExisting)
-            Dim descargador As New BackgroundDownloader
-
-            Try
-                Dim descarga As DownloadOperation = descargador.CreateDownload(fuente, ficheroImagen)
-                Await descarga.StartAsync
-                descargaFinalizada = True
-            Catch ex As Exception
-
-            End Try
-        End If
-
-        If TypeOf fuente Is BitmapImage Then
-            Dim ficheroOrigen As StorageFile = imagen.Tag
-            ficheroImagen = Await ApplicationData.Current.LocalFolder.CreateFileAsync(nombreFondo + ".png", CreationCollisionOption.ReplaceExisting)
-
-            Await ficheroOrigen.CopyAndReplaceAsync(ficheroImagen)
-            descargaFinalizada = True
-        End If
-
-        Dim recursos As New Resources.ResourceLoader
-
-        If descargaFinalizada = True Then
-            If tipo = 0 Then
-                Dim estado As Boolean = Await UserProfilePersonalizationSettings.Current.TrySetWallpaperImageAsync(ficheroImagen)
-
-                If estado = True Then
-                    Toast(recursos.GetString("ImageSuccess"), Nothing)
-                Else
-                    Toast(recursos.GetString("ImageFail"), Nothing)
-                End If
-            ElseIf tipo = 1 Then
-                Dim estado As Boolean = Await UserProfilePersonalizationSettings.Current.TrySetLockScreenImageAsync(ficheroImagen)
-
-                If estado = True Then
-                    Toast(recursos.GetString("ImageSuccess"), Nothing)
-                Else
-                    Toast(recursos.GetString("ImageFail"), Nothing)
-                End If
-            ElseIf tipo = 2 Then
-                Dim ficherosImagen As New List(Of String) From {
-                    ".png"
-                }
-
-                Dim guardarPicker As New Pickers.FileSavePicker With {
-                    .SuggestedStartLocation = Pickers.PickerLocationId.PicturesLibrary,
-                    .SuggestedFileName = "Image"
-                }
-
-                guardarPicker.FileTypeChoices.Add("Image Files", ficherosImagen)
-
-                Dim ficheroGuardado As StorageFile = Await guardarPicker.PickSaveFileAsync
-
-                Await ficheroImagen.CopyAndReplaceAsync(ficheroGuardado)
-            End If
-        End If
-
-        botonAñadirFondoEscritorio.IsEnabled = True
-        botonAñadirFondoBloqueo.IsEnabled = True
-        botonGuardarImagen.IsEnabled = True
-
-    End Sub
-
-    Private Sub CbFondos_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cbFondos.SelectionChanged
-
-        tbTituloFondo.Visibility = Visibility.Collapsed
-        tbTituloFondo.Text = String.Empty
-
-        tbDescripcionFondo.Visibility = Visibility.Collapsed
-        tbDescripcionFondo.Text = String.Empty
-
-        If cbFondos.SelectedIndex = 0 Then
-            Bing.Generar()
-        ElseIf cbFondos.SelectedIndex = 1 Then
-            Nasa.Generar()
-        ElseIf cbFondos.SelectedIndex = 2 Then
-            NationalGeographic.Generar()
-        ElseIf cbFondos.SelectedIndex = 3 Then
-            Space.Generar()
-        ElseIf cbFondos.SelectedIndex = 4 Then
-            Reddit.Generar("EarthPorn")
-        ElseIf cbFondos.SelectedIndex = 5 Then
-            Reddit.Generar("spaceporn")
-        ElseIf cbFondos.SelectedIndex = 6 Then
-            Reddit.Generar("CityPorn")
-        ElseIf cbFondos.SelectedIndex = 7 Then
-            Reddit.Generar("Map_Porn")
-        End If
-
-    End Sub
 End Class
